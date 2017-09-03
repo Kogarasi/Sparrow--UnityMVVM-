@@ -8,6 +8,7 @@ using Sparrow.Binding;
 using Sparrow.Interface;
 
 namespace Sparrow {
+
 	public class Scene<T>: MonoBehaviour where T: Scene<T> {
 		List<ModelBase> models = new List<ModelBase>();
 		List<Updatable> updatables = new List<Updatable>();
