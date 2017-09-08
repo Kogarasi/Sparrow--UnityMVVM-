@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Sparrow {
@@ -16,7 +17,13 @@ namespace Sparrow {
 		}
 
 		public string getPrefabPathFromAttribute( object obj ){
-			var attrs = obj.GetType().GetCustomAttributes( typeof( Binding.PrefabAttribute ), true );
+			return getPrefabPathFromAttribute( obj.GetType() );
+		}
+		public string getPrefabPathFromAttribute( Type type ){
+			var attrs = type.GetCustomAttributes( typeof( Binding.PrefabAttribute ), true );
+			if( !attrs.Any() ){
+				throw new Exception( "PrefabAttribute is not found!!" );
+			}
 			var attr = attrs.First() as Binding.PrefabAttribute;
 			return attr.path;
 		}
